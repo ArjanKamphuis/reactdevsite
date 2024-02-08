@@ -26,13 +26,10 @@ function Board({ xIsNext, squares, onPlay }: BoardProps): JSX.Element {
         nextSquares[i] = xIsNext ? 'X' : 'O';
         onPlay(nextSquares);
     }
-
-    const winner: string | null = calculateWinner(squares);
-    const status = winner ? `Winner: ${winner}` : `Next player: ${xIsNext ? 'X' : 'O'}`;
     
     return (
         <>
-            <div className="status w-40 text-center">{status}</div>
+            <div className="status w-40 text-center">{calculateStatus(squares, xIsNext)}</div>
             <div className="board w-40 flex flex-col justify-center items-center">
                 {[0, 1, 2].map((row: number) => (
                     <div key={row} className="board-row">
@@ -53,6 +50,7 @@ function Board({ xIsNext, squares, onPlay }: BoardProps): JSX.Element {
 export default function Game(): JSX.Element {
     const [history, setHistory] = useState<SquareType[]>([Array(9).fill(null)]);
     const [currentMove, setCurrentMove] = useState<number>(0);
+    const [reverseHistory, setReverseHistory] = useState<boolean>(false);
     const xIsNext = currentMove % 2 === 0;
     const currentSquares: SquareType = history[currentMove];
 
@@ -66,7 +64,8 @@ export default function Game(): JSX.Element {
         setCurrentMove(nextMove);
     }
 
-    const moves = history.map((_, move: number) => {
+    let moves = history.map((_, move: number) => {
+        if (move === currentMove) return <li key={move}>You are at move #{move}</li>;
         const description: string = move > 0 ? `Go to move #${move}` : 'Go to game start';
         return (
             <li key={move}>
@@ -74,13 +73,15 @@ export default function Game(): JSX.Element {
             </li>
         );
     });
+    if (reverseHistory) moves = moves.reverse();
 
     return (
         <div className="game">
             <div className="game-board">
                 <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
             </div>
-            <div className="game-info">
+            <div className="game-info space-y-4">
+                <button className="bg-gray-400 hover:bg-gray-500 py-1 px-2 rounded" onClick={() => setReverseHistory(!reverseHistory)}>Toggle history order</button>
                 <ol className="space-y-1">{moves}</ol>
             </div>
         </div>
@@ -105,4 +106,16 @@ function calculateWinner(squares: SquareType): string | null {
         }
     }
     return null;
+}
+
+function isBoardFull(squares: SquareType): boolean {
+    return squares.lastIndexOf(null) === -1;
+}
+
+function calculateStatus(squares: SquareType, xIsNext: boolean): string {
+    const winner: string | null = calculateWinner(squares);
+
+    if (winner) return `Winner: ${winner}`;
+    if (isBoardFull(squares)) return "It's a draw!";
+    return `Next player: ${xIsNext ? 'X' : 'O'}`;    
 }
