@@ -1,4 +1,5 @@
-import App from './tic-tac-toe/app';
+// import App from './tic-tac-toe/app';
+import App from './filterable-prouct-table/app';
 
 export default function Home() {
   return (
