@@ -1,24 +1,25 @@
+import Image from "next/image";
 import { getImageUrl } from "./utils";
 
-type ImageProps = {
-    imageId: string;
-    imageSize: number;
+type ProfileProps = {
+    person: Person;
+    imageSize?: number;
 }
 
-export interface ProfileProps {
+export type Person = {
     name: string;
-    image: ImageProps;
+    imageId: string;
     profession: string;
     awards: Array<string>;
     discovered: string;
 }
 
-export default function Profile({ profile } : { profile: ProfileProps }): JSX.Element {
-    const { name, image, profession, awards, discovered } = profile;
+export default function Profile({ person, imageSize = 70 } : ProfileProps): JSX.Element {
+    const { name, imageId, profession, awards, discovered } = person;
     return (
-        <section className="border border-black rounded p-4 space-y-2">
+        <section className="border border-gray-500 rounded p-4 space-y-2">
             <h2 className="text-xl font-semibold">{name}</h2>
-            <img className="rounded-full" src={getImageUrl(image.imageId)} alt={name} width={image.imageSize} height={image.imageSize} />
+            <Image className="rounded-full" src={getImageUrl(imageId)} alt={name} width={imageSize} height={imageSize} />
             <ul className="list-disc list-inside leading-none">
                 <li><b>Profession: </b>{profession}</li>
                 <li><b>Awards: {awards.length} </b>({awards.join(', ')})</li>

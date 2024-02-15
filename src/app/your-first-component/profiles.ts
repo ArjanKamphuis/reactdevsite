@@ -1,22 +1,16 @@
-import { ProfileProps } from "./Profile";
+import { Person } from "./Profile";
 
-const PROFILES: Array<ProfileProps> = [
+const PROFILES: Array<Person> = [
     {
         name: 'Maria Skłodowska-Curie',
-        image: {
-            imageId: 'szV5sdG',
-            imageSize: 70
-        },
+        imageId: 'szV5sdG',
         profession: 'physicist and chemist',
         awards: ['Nobel Prize in Physics', 'Nobel Prize in Chemistry', 'Davy Medal', 'Matteucci Medal'],
         discovered: 'polonium (chemical element)'
     },
     {
         name: 'Katsuko Saruhashi',
-        image: {
-            imageId: 'YfeOqp2',
-            imageSize: 70
-        },
+        imageId: 'YfeOqp2',
         profession: 'geochemist',
         awards: ['Miyake Prize for geochemistry', 'Tanaka Prize'],
         discovered: 'a method for measuring carbon dioxide in seawater'
