@@ -22,7 +22,7 @@ export default function Profile(): JSX.Element {
         <section className="space-y-5 p-5 border rounded-xl border-black">
             <h1 className="text-4xl font-bold">Children props</h1>
             <Card title="Photo">
-                <Image className="rounded-full" src="https://i.imgur.com/OKS67lhm.jpg" alt="Aklilu Lemma" width={70} height={70} />
+                <Image className="rounded-full" src="https://i.imgur.com/OKS67lhm.jpg" alt="Aklilu Lemma" width={70} height={70} sizes="100vw" />
             </Card>
             <Card title="About">
                 <p>Aklilu Lemma was a distinguished Ethiopian scientist who discovered a natural treatment to schistosomiasis.</p>

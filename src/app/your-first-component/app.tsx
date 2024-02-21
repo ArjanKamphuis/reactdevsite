@@ -8,6 +8,7 @@ import Image from "next/image";
 import RenderingList from "./rendering-lists";
 import RecipeList from "./recipe-list";
 import Poem from "./poem";
+import PureComponents from "./pure-components";
 
 type Person = {
     name: string;
@@ -73,6 +74,7 @@ function AvatarContainer(): JSX.Element {
 export default function App(): JSX.Element {
     return (
         <div className="space-y-4">
+            <PureComponents />
             <Poem />
             <RecipeList />
             <RenderingList />
