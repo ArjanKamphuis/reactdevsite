@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { getImageUrl } from "./utils";
 import { useState } from "react";
+import Button from "../common/button";
 
 type Person = {
     name: string;
@@ -15,9 +16,7 @@ function Panel({ children }: { children: React.ReactNode}): JSX.Element {
     const [open, setOpen] = useState<boolean>(true);
     return (
         <section className="border border-gray-800 rounded-md p-2 w-48 space-y-2">
-            <button className="border border-black px-2 py-1 rounded-xl bg-gray-900 hover:bg-gray-700 text-white" onClick={() => setOpen(!open)}>
-                {open ? 'Collapse' : 'Expand'}
-            </button>
+            <Button onClick={() => setOpen(!open)}>{open ? 'Collapse' : 'Expand'}</Button>
             {open && children}
         </section>
     );
