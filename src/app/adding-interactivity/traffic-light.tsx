@@ -10,7 +10,7 @@ export default function TraffickLight(): JSX.Element {
     }
 
     return (
-        <section className="border border-black rounded-xl p-5 space-y-2">
+        <section className="border border-black rounded-xl p-5 space-y-2 w-fit">
             <h1 className="text-2xl font-bold">State as a Snapshot</h1>
             <Button onClick={handleClick}>Change to {walk ? 'Stop': 'Walk'}</Button>
             <h2 className={`text-xl font-semibold ${walk ? 'text-green-500' : 'text-red-500'}`}>{walk ? 'Walk': 'Stop'}</h2>

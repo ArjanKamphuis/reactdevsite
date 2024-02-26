@@ -67,14 +67,8 @@ increment.toString = () => 'n => n+1';
 
 function getFinalState(baseState: number, queue: Queue): number {
     let finalState: number = baseState;
-
     for (const q of queue) {
-        if (typeof q === 'function') {
-            finalState = q(finalState);
-        } else {
-            finalState = q;
-        }
+        finalState = typeof q === 'function' ? q(finalState) : q;
     }
-
     return finalState;
 }

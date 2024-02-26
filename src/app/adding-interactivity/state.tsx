@@ -2,6 +2,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { Sculpture, sculptureList } from "./sculpture-list";
 import Button from "../common/button";
 import Image from "next/image";
+import TextInput from "../common/textInput";
 
 function Gallery(): JSX.Element {
     const [index, setIndex] = useState<number>(0);
@@ -44,9 +45,9 @@ function Form(): JSX.Element {
 
     return (
         <form className="space-y-2" onSubmit={(e: FormEvent) => e.preventDefault()}>
-            <div className="space-x-2">
-                <input className="px-2 py-1 border border-black" placeholder="First name..." value={firstName} onChange={handleFirstNameChange} />
-                <input className="px-2 py-1 border border-black" placeholder="Last name..." value={lastName} onChange={handleLastNameChange} />
+            <div className="grid gap-2 grid-cols-2">
+                <TextInput placeholder="First name..." value={firstName} onChange={handleFirstNameChange} />
+                <TextInput placeholder="Last name..." value={lastName} onChange={handleLastNameChange} />
             </div>
             <h2 className="text-xl font-semibold">Hi, {firstName} {lastName}</h2>
             <Button type="reset" onClick={handleReset}>Reset</Button>
@@ -68,7 +69,7 @@ function FeedbackForm(): JSX.Element {
 
     return (
         <form className="space-y-2" onSubmit={handleSubmit}>
-            <textarea className="block border border-black rounded-xl px-2 py-1 w-full" placeholder="Message" value={message} onChange={(e: ChangeEvent<HTMLTextAreaElement>) => setMessage(e.target.value)} />
+            <textarea className="block border border-black rounded px-2 py-1 w-full" placeholder="Message" value={message} onChange={(e: ChangeEvent<HTMLTextAreaElement>) => setMessage(e.target.value)} />
             <Button type="submit">Send</Button>
         </form>
     );
