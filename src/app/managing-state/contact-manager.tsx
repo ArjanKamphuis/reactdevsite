@@ -30,9 +30,8 @@ function ContactList({ contacts, selectedId, onSelect }: ContactListProps): JSX.
     return (
         <ul className="flex space-x-2">
             {contacts.map(contact => {
-                const liClasses: string = `border-4 rounded-xl ${contact.id === selectedId ? 'border-blue-500 bg-blue-500' : 'border-transparent'}`;
-                return <li key={contact.id} className={liClasses}>
-                    <Button onClick={() => onSelect(contact.id)}>{contact.name}</Button>
+                return <li key={contact.id}>
+                    <Button onClick={() => onSelect(contact.id)} isHighlighted={contact.id === selectedId}>{contact.name}</Button>
                 </li>
             })}
         </ul>
@@ -45,7 +44,7 @@ function EditContact({ initialData, onSave }: EditContactProps): JSX.Element {
     return (
         <div className="space-y-2">
             <TextInputField label="Name:" textInputProps={{ value: name, onChange: e => setName(e.target.value) }} />
-            <TextInputField label="Email:" textInputProps={{ value: email, onChange: e=> setEmail(e.target.value) }} />
+            <TextInputField label="Email:" textInputProps={{ type: 'email', value: email, onChange: e=> setEmail(e.target.value) }} />
             <div className="space-x-2">
                 <Button onClick={() => onSave({ id: initialData.id, name: name, email: email })}>Save</Button>
                 <Button onClick={() => { setName(initialData.name); setEmail(initialData.email) }}>Reset</Button>

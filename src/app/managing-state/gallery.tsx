@@ -17,7 +17,7 @@ export default function Gallery(): JSX.Element {
             <h2 className="text-xl font-semibold">Clear an image while it&apos;s loading</h2>
             <Button onClick={handleClick}>Next</Button>
             <h3 className="text-lg font-medium">Image {index +1} of {images.length}</h3>
-            <Image className="w-36 h-36" id={image.src} src={image.src} alt={image.place} width={0} height={0} sizes="100vw" priority />
+            <Image className="w-36 h-36" key={image.src} src={image.src} alt={image.place} width={0} height={0} sizes="100vw" priority />
             <p>{image.place}</p>
         </div>
     );

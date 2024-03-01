@@ -52,7 +52,7 @@ export default function FilterableList(): JSX.Element {
     return (
         <div className="space-y-2">
             <h2 className="text-xl font-semibold">Filterable List</h2>
-            <TextInputField label="Search:" textInputProps={{ value: query, onChange: handleChange }}/>
+            <TextInputField label="Search:" textInputProps={{ type: 'search', value: query, onChange: handleChange }}/>
             <hr className="border-black" />
             <List items={filterItems(foods, query)} />
         </div>
