@@ -1,7 +1,8 @@
 // import App from './tic-tac-toe/app';
 // import App from './filterable-prouct-table/app';
 // import App from './your-first-component/app';
-import App from './adding-interactivity/app';
+// import App from './adding-interactivity/app';
+import App from './managing-state/app';
 
 export default function Home() {
   return (

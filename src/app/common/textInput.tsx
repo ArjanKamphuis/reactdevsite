@@ -1,8 +1,10 @@
-import { ChangeEventHandler, FormEventHandler } from "react";
+import { ChangeEventHandler } from "react";
 
-type TextInputProps = {
+export type TextInputChangeEventHandler = ChangeEventHandler<HTMLInputElement>;
+
+export type TextInputProps = {
     value: string;
-    onChange?: ChangeEventHandler<HTMLInputElement>;
+    onChange?: TextInputChangeEventHandler;
     placeholder?: string;
     id?: string;
     name?: string;
