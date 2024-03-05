@@ -2,7 +2,8 @@
 // import App from './filterable-prouct-table/app';
 // import App from './your-first-component/app';
 // import App from './adding-interactivity/app';
-import App from './managing-state/app';
+// import App from './managing-state/app';
+import App from "./escape-hatches/app";
 
 export default function Home() {
   return (
