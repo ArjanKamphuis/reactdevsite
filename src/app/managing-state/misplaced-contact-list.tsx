@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Button from "../common/button";
+import CheckboxField from "../common/CheckboxField";
 
 type Contact = {
     id: number;
@@ -27,10 +28,7 @@ export default function MisplacedContactList(): JSX.Element {
     const displayedContacts: Contact[] = reverse ? [...contacts].reverse() : contacts;
     return (
         <div className="space-y-2">
-            <label>
-                <input type="checkbox" checked={reverse} onChange={e => setReverse(e.target.checked)} />
-                &nbsp;Show in reverse order
-            </label>
+            <CheckboxField checked={reverse} onChange={e => setReverse(e.target.checked)}>Show in reverse order</CheckboxField>
             <ul className="space-y-2">
                 {displayedContacts.map(contact => <li key={contact.id}><Contact contact={contact} /></li>)}
             </ul>

@@ -1,5 +1,5 @@
 import Gallery from "./gallery";
-import { getImageUrl } from "./utils";
+import { getImageUrl } from "../common/utils";
 import profiles from './profiles';
 import Card from './card';
 import PackingList from "./packing-list";

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { getImageUrl } from "./utils";
+import { getImageUrl } from "../common/utils";
 import { useState } from "react";
 import Button from "../common/button";
 

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { getImageUrl } from "./utils";
+import { getImageUrl } from "../common/utils";
 
 type ProfileProps = {
     person: Person;

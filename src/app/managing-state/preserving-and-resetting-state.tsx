@@ -5,6 +5,7 @@ import ContactManager from "./contact-manager";
 import TextInputField from "../common/TextInputField";
 import Gallery from "./gallery";
 import MisplacedContactList from "./misplaced-contact-list";
+import CheckboxField from "../common/CheckboxField";
 
 function Form(): JSX.Element {
     const [text, setText] = useState<string>('');
@@ -29,17 +30,11 @@ function Field({ label }: { label: string }): JSX.Element {
 
 function FieldApp(): JSX.Element {
     const [reverse, setReverse] = useState<boolean>(false);
-    const checkBox: JSX.Element = (
-        <label className="block">
-            <input className="mr-1" type="checkbox" checked={reverse} onChange={e => setReverse(e.target.checked)} />
-            Reverse order
-        </label>
-    );
     const fields: JSX.Element[] = [<Field key="firstName" label="First name" />, <Field key="lastName" label="Last name" />];
     return (
         <div className="space-y-2">
             {reverse ? fields.reverse() : fields}
-            {checkBox}
+            <CheckboxField checked={reverse} onChange={e => setReverse(e.target.checked)}>Reverse order</CheckboxField>
         </div>
     );
 }

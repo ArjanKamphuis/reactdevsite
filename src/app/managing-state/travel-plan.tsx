@@ -1,6 +1,7 @@
 import { useState } from "react";
 import TextInput from "../common/textInput";
 import Button from "../common/button";
+import CheckboxField from "../common/CheckboxField";
 
 type Item = {
     id: number;
@@ -35,19 +36,13 @@ function AddItem({ onAddItem }: { onAddItem: AddItemHandler }): JSX.Element {
 }
 
 function PackingList({ items, onChangeItem, onDeleteItem }: PackingListProps): JSX.Element {
-    return (
-        <ul className="space-y-2">
-            {items.map(item => (
-                <li key={item.id} className="flex justify-between">
-                    <label>
-                        <input type="checkbox" checked={item.packed} onChange={e => onChangeItem({ ...item, packed: e.target.checked })} />
-                        {' '}{item.title}
-                    </label>
-                    <Button onClick={() => onDeleteItem(item.id)}>Delete</Button>
-                </li>
-            ))}
-        </ul>
+    const listItems: JSX.Element[] = items.map(item =>
+        <li key={item.id} className="flex justify-between">
+            <CheckboxField checked={item.packed} onChange={e => onChangeItem({ ...item, packed: e.target.checked })}>{item.title}</CheckboxField>
+            <Button onClick={() => onDeleteItem(item.id)}>Delete</Button>
+        </li>
     );
+    return <ul className="space-y-2">{listItems}</ul>;
 }
 
 export default function TravelPlan(): JSX.Element {
