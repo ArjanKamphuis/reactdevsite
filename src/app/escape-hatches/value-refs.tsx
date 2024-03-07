@@ -1,13 +1,14 @@
 import { MutableRefObject, useRef, useState } from "react";
 import TextInput from "../common/textInput";
 import Button from "../common/button";
+import ChapterSection from "../common/ChapterSection";
 
 function Chat(): React.JSX.Element {
     const [text, setText] = useState('');
     const [isSending, setIsSending] = useState(false);
     const timeoutRef: MutableRefObject<NodeJS.Timeout | null> = useRef(null);
 
-    function handleSend() {
+    function handleSend(): void {
         setIsSending(true);
         timeoutRef.current = setTimeout(() => {
             console.log(`Sent: ${text}!`);
@@ -15,7 +16,7 @@ function Chat(): React.JSX.Element {
         }, 3000);
     }
 
-    function handleUndo() {
+    function handleUndo(): void {
         setIsSending(false);
         if (timeoutRef.current !== null) clearTimeout(timeoutRef.current);
     }
@@ -75,12 +76,12 @@ function RefChat(): React.JSX.Element {
 
 export default function ValueRefs(): React.JSX.Element {
     return (
-        <section className="border border-black rounded-xl p-5 space-y-4 w-fit">
+        <ChapterSection>
             <h1 className="text-2xl font-bold">Referencing Values with Refs</h1>
             <RefChat />
             <Dashboard />
             <Toggle />
             <Chat />
-        </section>
+        </ChapterSection>
     );
 }
