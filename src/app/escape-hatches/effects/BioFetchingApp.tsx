@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 export default function BioFetchingApp(): React.JSX.Element {
-    const [person, setPerson] = useState<string>('Alice');
+    const [person, setPerson] = useState<string>(people[0]);
     const [bio, setBio] = useState<string | null>(null);
 
     useEffect(() => {
@@ -24,9 +24,7 @@ export default function BioFetchingApp(): React.JSX.Element {
     return (
         <div className="space-y-2">
             <select className="py-1 px-2 border border-black rounded" value={person} onChange={e => setPerson(e.target.value)}>
-                <option value="Alice">Alice</option>
-                <option value="Bob">Bob</option>
-                <option value="Taylor">Taylor</option>
+                {people.map(p => <option key={p} value={p}>{p}</option>)}
             </select>
             <hr className="border-black" />
             <p><i>{bio ?? 'Loading...'}</i></p>
@@ -42,3 +40,5 @@ async function fetchBio(person: string): Promise<string> {
         }, delay);
     });
 }
+
+const people: string[] = ['Alice', 'Bob', 'Taylor'];

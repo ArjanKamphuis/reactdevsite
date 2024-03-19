@@ -56,15 +56,25 @@ function CatFriends(): React.JSX.Element {
         );
     });
 
-    function handleClick(): void {
-        flushSync(() => setIndex((index + 1) % catList.length));
+    const changeListItem = (newIndex: number): void => {
+        flushSync(() => setIndex(newIndex));
         liRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-    }
+    };
+
+    const handleRandomClick = (): void => {
+        let newIndex: number = index;
+        while (newIndex === index) {
+            newIndex = Math.floor(Math.random() * catList.length);
+        }
+        changeListItem(newIndex);
+    };
 
     return (
         <div className="space-y-2">
             <div className="flex space-x-2">
-                <Button onClick={handleClick}>Next</Button>
+                <Button onClick={() => changeListItem(index - 1 < 0 ? catList.length - 1 : index - 1)}>Previous</Button>
+                <Button onClick={() => changeListItem((index + 1) % catList.length)}>Next</Button>
+                <Button onClick={handleRandomClick}>Random</Button>
                 <p>Image {index + 1} of {catList.length}</p>
             </div>
             <ul className="flex space-x-2 overflow-hidden">{listItems}</ul>

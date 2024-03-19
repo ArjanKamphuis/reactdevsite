@@ -19,7 +19,7 @@ export default function CounterApp(): React.JSX.Element {
     const [show, setShow] = useState<boolean>(false);
     return (
         <div className="space-y-2">
-            <Button onClick={() => setShow(!show)}>{show ? 'Hide' : 'Show'} counter</Button>
+            <Button onClick={() => setShow(s => !s)}>{show ? 'Hide' : 'Show'} counter</Button>
             <hr className="border-black" />
             {show && <Counter />}
         </div>
