@@ -1,3 +1,4 @@
+import CheckboxField from "@/app/common/CheckboxField";
 import { Select } from "@/app/common/Select";
 import TextInput from "@/app/common/textInput";
 import { useEffect, useState } from "react";
@@ -10,27 +11,43 @@ type ConnectionType = {
 type Room = 'general' | 'travel' | 'music';
 const rooms: Room[] = ['general', 'travel', 'music'];
 
+type ChatRoomProps = {
+    room: Room;
+    createConnection: (serverUrl: string, room: Room) => ConnectionType;
+};
+
 const serverUrl: string = 'https://localhost:1234';
 
-const createConnection = (serverUrl: string, room: Room): ConnectionType => {
+const createEncryptedConnection = (serverUrl: string, room: Room): ConnectionType => {
     return {
         connect() {
-            console.log(`✅ Connecting to "${room}" at ${serverUrl}`);
+            console.log(`✅ Connecting to "${room}" at ${serverUrl} (encrypted)`);
         },
         disconnect() {
-            console.log(`❌ Disconnected from "${room}" at ${serverUrl}`);
+            console.log(`❌ Disconnected from "${room}" at ${serverUrl} (encrypted)`);
         }
     }
 };
 
-const Chatroom = ({ room }: { room: Room }): React.JSX.Element => {
+const createUnencryptedConnection = (serverUrl: string, room: Room): ConnectionType => {
+    return {
+        connect() {
+            console.log(`✅ Connecting to "${room}" at ${serverUrl} (unencrypted)`);
+        },
+        disconnect() {
+            console.log(`❌ Disconnected from "${room}" at ${serverUrl} (unencrypted)`);
+        }
+    }
+};
+
+const ChatRoom = ({ room, createConnection }: ChatRoomProps): React.JSX.Element => {
     const [message, setMessage] = useState<string>('');
 
     useEffect(() => {
         const connection: ConnectionType = createConnection(serverUrl, room);
         connection.connect();
-        return () => connection.disconnect();
-    }, [room]);
+        return (): void => connection.disconnect();
+    }, [room, createConnection]);
 
     return (
         <div className="space-y-2">
@@ -42,6 +59,7 @@ const Chatroom = ({ room }: { room: Room }): React.JSX.Element => {
 
 export const LifeCycleChatRoomApp = (): React.JSX.Element => {
     const [room, setRoom] = useState<Room>('general');
+    const [isEncrypted, setIsEncrypted] = useState<boolean>(false);
     return (
         <div className="space-y-2">
             <label className="flex items-center space-x-2">
@@ -50,8 +68,11 @@ export const LifeCycleChatRoomApp = (): React.JSX.Element => {
                     {rooms.map(r => <option key={r} value={r}>{r}</option>)}
                 </Select>
             </label>
+            <CheckboxField checked={isEncrypted} onChange={e => setIsEncrypted(e.target.checked)}>
+                {isEncrypted ? 'Disable' : 'Enable'} encryption
+            </CheckboxField>
             <hr className="border-black" />
-            <Chatroom key={room} room={room} />
+            <ChatRoom room={room} createConnection={isEncrypted ? createEncryptedConnection : createUnencryptedConnection} />
         </div>
     );
 };

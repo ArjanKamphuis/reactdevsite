@@ -7,11 +7,10 @@ type TextInputFieldProps = {
 };
 
 export default function TextInputField({ label, textInputProps, labelWidth = 'w-24' }: TextInputFieldProps): JSX.Element {
-    const { type, value, onChange, placeholder, id, name } = textInputProps;
     return (
         <label className="flex items-center">
             <span className={labelWidth}>{label}</span>
-            <TextInput type={type} value={value} onChange={onChange} placeholder={placeholder} id={id} name={name} />
+            <TextInput {...textInputProps} />
         </label>
     );
 }
