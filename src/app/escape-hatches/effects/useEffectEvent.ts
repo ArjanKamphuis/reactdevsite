@@ -5,7 +5,7 @@ export function useEffectEvent<T extends Function>(event: T): T {
     useEffect(() => {
         fn.current = event;
     }, [event]);
-    return useCallback<(...args: unknown[]) => void>((...args) => {
+    return useCallback<(...args: unknown[]) => unknown>((...args) => {
         return fn.current?.call(null, ...args);
     }, []) as unknown as T;
 }
